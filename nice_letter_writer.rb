@@ -5,20 +5,25 @@ nice_letter = File.read('templates/nice_letter_template.txt.erb')
 
 kids_data.each_line do |kid|
 
-  kid_data_array = kid.split
+	kid_data_array = kid.split
 
-  name     = kid_data_array[0]
-  gender   = kid_data_array[1]
-  behavior = kid_data_array[2]
-  toys     = kid_data_array[3..8]
+	name     = kid_data_array[0]
+	gender   = kid_data_array[1]
+	behavior = kid_data_array[2]
+	toys     = kid_data_array[3..8]
+	toysnok  = kid_data_array.delete[Kaleidoscope]
 
-  next unless behavior == 'nice'
+	end
 
-  filename    = 'letters/nice/' + name + '.txt'
-  letter_text = ERB.new(nice_letter, nil, '-').result(binding)
+	next unless behavior == 'nice'
 
-  puts "Writing #{filename}."
-  File.write(filename, letter_text)
+	filename    = 'letters/nice/' + name + '.txt'
+
+	letter_text = ERB.new(nice_letter, nil, '-').result(binding)
+
+	puts "Writing #{filename}."
+
+	File.write(filename, letter_text)
 
 end
 
